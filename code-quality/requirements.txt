@@ -1,0 +1,40 @@
+# ANISA Code Quality System Dependencies
+
+# Static Analysis
+flake8==6.1.0
+pylint==3.0.3
+black==23.12.1
+isort==5.13.2
+mypy==1.8.0
+
+# Test Coverage
+pytest==7.4.4
+pytest-cov==4.1.0
+coverage==7.3.2
+
+# Complexity Analysis
+radon==6.0.1
+mccabe==0.7.0
+
+# Documentation Quality
+pydocstyle==6.3.0
+doc8==1.1.1
+
+# Security Scanning
+bandit==1.7.5
+safety==2.3.5
+pip-audit==2.6.1
+
+# Performance Analysis
+py-spy==0.3.14
+memory-profiler==0.61.0
+
+# Reporting & Visualization
+rich==13.7.0
+plotly==5.17.0
+pandas==2.1.4
+
+# Development Tools
+pre-commit==3.6.0
+tox==4.11.4
+jinja2==3.1.2
