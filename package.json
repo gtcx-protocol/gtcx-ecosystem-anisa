@@ -1,0 +1,79 @@
+{
+  "name": "gtcx-ecosystem-anisa",
+  "version": "1.0.0",
+  "description": "ANISA: Authentic Native Intelligence Systematically Applied - Cultural Intelligence Framework for GTCX Ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python -m uvicorn anisa_core.main:app --reload --host 0.0.0.0 --port 8000",
+    "start": "python -m uvicorn anisa_core.main:app --host 0.0.0.0 --port 8000",
+    "test": "pytest tests/ -v --cov=anisa_core --cov-report=html --cov-report=term",
+    "test:unit": "pytest tests/unit/ -v",
+    "test:integration": "pytest tests/integration/ -v",
+    "test:cultural": "pytest tests/cultural/ -v",
+    "test:performance": "pytest tests/performance/ -v",
+    "lint": "black . && isort . && flake8 . && mypy .",
+    "format": "black . && isort .",
+    "docs": "mkdocs serve",
+    "docs:build": "mkdocs build",
+    "deploy:local": "python deployment/local_edge/deploy.py",
+    "deploy:regional": "python deployment/regional_hub/deploy.py",
+    "deploy:global": "python deployment/global_cloud/deploy.py",
+    "cultural:validate": "python scripts/cultural_validation.py",
+    "cultural:learn": "python scripts/cultural_learning.py",
+    "gtcx:integrate": "python scripts/gtcx_integration.py",
+    "monitor": "python scripts/monitoring.py"
+  },
+  "keywords": [
+    "anisa",
+    "cultural-intelligence",
+    "ai",
+    "gtcx",
+    "global-trade",
+    "cultural-authenticity",
+    "native-intelligence"
+  ],
+  "author": "GTCX Protocol Ecosystem",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtcx-protocol/gtcx-ecosystem-anisa.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0",
+    "commander": "^11.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.0",
+    "inquirer": "^9.2.0"
+  },
+  "config": {
+    "cultural_regions": [
+      "west_africa",
+      "east_africa", 
+      "south_asia",
+      "east_asia",
+      "latin_america",
+      "middle_east"
+    ],
+    "deployment_tiers": [
+      "local_edge",
+      "regional_hub", 
+      "global_cloud"
+    ],
+    "gtcx_integration": {
+      "cognitive": true,
+      "agents": true,
+      "platforms": true
+    }
+  }
+}

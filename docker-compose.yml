@@ -1,0 +1,171 @@
+version: '3.8'
+
+services:
+  # ANISA Core Service
+  anisa-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - CULTURAL_REGION=west_africa
+      - GTCX_INTEGRATION=false
+      - DATABASE_URL=postgresql://anisa:anisa_password@anisa-db:5432/anisa_dev
+      - REDIS_URL=redis://anisa-redis:6379
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./anisa_core:/app/anisa_core
+      - ./tests:/app/tests
+      - ./config:/app/config
+    depends_on:
+      - anisa-db
+      - anisa-redis
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  anisa-db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=anisa_dev
+      - POSTGRES_USER=anisa
+      - POSTGRES_PASSWORD=anisa_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # Redis Cache
+  anisa-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # ChromaDB Vector Database
+  anisa-chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # Prometheus Monitoring
+  anisa-prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # Grafana Dashboard
+  anisa-grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=anisa_admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - anisa-prometheus
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # Cultural Validation Service
+  anisa-cultural-validator:
+    build:
+      context: .
+      dockerfile: Dockerfile.cultural-validator
+    environment:
+      - CULTURAL_REGION=west_africa
+      - VALIDATION_MODE=expert
+      - EXPERT_EMAILS=expert1@example.com,expert2@example.com
+    volumes:
+      - ./cultural_validation:/app/cultural_validation
+      - ./config:/app/config
+    depends_on:
+      - anisa-core
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # GTCX Integration Service
+  anisa-gtcx-integration:
+    build:
+      context: .
+      dockerfile: Dockerfile.gtcx-integration
+    environment:
+      - GTCX_ENDPOINT=https://gtcx-staging.example.com
+      - GTCX_API_KEY=${GTCX_API_KEY}
+      - INTEGRATION_MODE=staging
+    volumes:
+      - ./gtcx_integration:/app/gtcx_integration
+      - ./config:/app/config
+    depends_on:
+      - anisa-core
+    networks:
+      - anisa-network
+    restart: unless-stopped
+
+  # Load Testing Service
+  anisa-load-tester:
+    build:
+      context: .
+      dockerfile: Dockerfile.load-tester
+    environment:
+      - TARGET_URL=http://anisa-core:8000
+      - USERS=100
+      - SPAWN_RATE=10
+      - RUN_TIME=300
+    depends_on:
+      - anisa-core
+    networks:
+      - anisa-network
+    restart: "no"
+
+volumes:
+  postgres_data:
+  redis_data:
+  chroma_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  anisa-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
