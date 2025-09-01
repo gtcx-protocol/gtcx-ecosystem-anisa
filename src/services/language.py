@@ -6,6 +6,7 @@ import logging
 from typing import List, Dict, Any
 from models import CulturalContext, NativeUnderstanding, CulturalRegion, CulturalVariant
 from config import ANISAConfig
+from models import TradeContext, GTCEcosystemComponent, CulturalComplianceFactor
 
 
 class NativeLanguageService:
@@ -23,7 +24,7 @@ class NativeLanguageService:
                 "Respect for elders and tradition",
                 "Harmony and balance"
             ],
-            CulturalVariant.JUGAAD: [
+            CulturalVariant.JUGGAD: [
                 "Creative problem solving",
                 "Resource optimization",
                 "Innovation through constraints",
@@ -57,29 +58,56 @@ class NativeLanguageService:
             # Extract cultural insights
             insights = self._extract_cultural_insights(user_input, cultural_context)
 
-            # Analyze contextual meaning
-            contextual_meaning = self._analyze_contextual_meaning(user_input, cultural_context)
+            # Detect dialect
+            dialect = await self.detect_dialect(user_input, cultural_context.region)
 
-            # Identify cultural nuances
-            cultural_nuances = self._identify_cultural_nuances(user_input, cultural_context)
+            # Generate trade implications
+            trade_implications = self._generate_trade_implications(user_input, cultural_context)
 
-            # Detect trust indicators
-            trust_indicators = self._detect_trust_indicators(user_input, cultural_context)
+            # Generate compliance notes
+            compliance_notes = self._generate_compliance_notes(user_input, cultural_context)
+
+            # Generate GTCX recommendations
+            gtcx_recommendations = self._generate_gtcx_recommendations(user_input, cultural_context)
+
+            # Generate community insights
+            community_insights = self._generate_community_insights(user_input, cultural_context)
+
+            # Generate sovereignty considerations
+            sovereignty_considerations = self._generate_sovereignty_considerations(user_input, cultural_context)
+
+            # Identify risk factors
+            risk_factors = self._identify_risk_factors(user_input, cultural_context)
+
+            # Identify opportunities
+            opportunities = self._identify_opportunities(user_input, cultural_context)
 
             return NativeUnderstanding(
+                language_confidence=0.85,  # Default confidence
+                dialect_detected=dialect or "standard",
                 cultural_insights=insights,
-                contextual_meaning=contextual_meaning,
-                cultural_nuances=cultural_nuances,
-                trust_indicators=trust_indicators
+                trade_implications=trade_implications,
+                compliance_notes=compliance_notes,
+                gtcx_recommendations=gtcx_recommendations,
+                community_insights=community_insights,
+                sovereignty_considerations=sovereignty_considerations,
+                risk_factors=risk_factors,
+                opportunity_indicators=opportunities
             )
 
         except Exception as e:
             self.logger.error(f"Error processing native language: {e}")
             return NativeUnderstanding(
+                language_confidence=0.0,
+                dialect_detected="unknown",
                 cultural_insights=["Error processing language"],
-                contextual_meaning={"error": str(e)},
-                cultural_nuances=["Unable to detect nuances"],
-                trust_indicators=["Unable to detect trust indicators"]
+                trade_implications=["Unable to process trade implications"],
+                compliance_notes=["Unable to process compliance notes"],
+                gtcx_recommendations=["Unable to generate GTCX recommendations"],
+                community_insights=["Unable to process community insights"],
+                sovereignty_considerations=["Unable to process sovereignty considerations"],
+                risk_factors=["Unable to identify risk factors"],
+                opportunity_indicators=["Unable to identify opportunities"]
             )
 
     async def detect_language(self, text: str) -> str:
@@ -137,81 +165,117 @@ class NativeLanguageService:
 
         return insights
 
+    def _generate_trade_implications(self, text: str, context: CulturalContext) -> List[str]:
+        """Generate trade implications based on cultural context."""
+        implications = []
+        
+        if context.trade_context == TradeContext.COMPLIANCE:
+            implications.append("Focus on regulatory compliance and documentation")
+        elif context.trade_context == TradeContext.NEGOTIATION:
+            implications.append("Emphasize relationship building and trust")
+        elif context.trade_context == TradeContext.DOCUMENTATION:
+            implications.append("Ensure proper documentation and verification")
+        
+        if context.variant == CulturalVariant.UBUNTU:
+            implications.append("Include community stakeholders in trade decisions")
+        elif context.variant == CulturalVariant.GUANXI:
+            implications.append("Build long-term business relationships")
+        
+        return implications
+
+    def _generate_compliance_notes(self, text: str, context: CulturalContext) -> List[str]:
+        """Generate compliance notes based on cultural context."""
+        notes = []
+        
+        for factor in context.cultural_compliance_factors:
+            if factor == CulturalComplianceFactor.COMMUNITY_CONSENT:
+                notes.append("Require community consultation for compliance")
+            elif factor == CulturalComplianceFactor.TRADITIONAL_PRACTICES:
+                notes.append("Respect traditional practices in compliance")
+            elif factor == CulturalComplianceFactor.LOCAL_AUTHORITY:
+                notes.append("Include local authority in compliance process")
+        
+        return notes
+
+    def _generate_gtcx_recommendations(self, text: str, context: CulturalContext) -> List[str]:
+        """Generate GTCX-specific recommendations."""
+        recommendations = []
+        
+        for component in context.gtcx_components:
+            if component == GTCEcosystemComponent.ASM_PATHWAYS:
+                recommendations.append("Use ASM Pathways for community-validated mining")
+            elif component == GTCEcosystemComponent.GCI_COMPLIANCE:
+                recommendations.append("Leverage GCI for cultural compliance scoring")
+            elif component == GTCEcosystemComponent.PANX_ORACLE:
+                recommendations.append("Utilize PANX Oracle for multi-stakeholder consensus")
+        
+        return recommendations
+
+    def _generate_community_insights(self, text: str, context: CulturalContext) -> List[str]:
+        """Generate community insights based on cultural context."""
+        insights = []
+        
+        for stakeholder in context.community_stakeholders:
+            if "traditional_authority" in stakeholder:
+                insights.append("Respect traditional authority structures")
+            elif "mining_cooperatives" in stakeholder:
+                insights.append("Engage with mining cooperatives")
+            elif "local_communities" in stakeholder:
+                insights.append("Include local community perspectives")
+        
+        return insights
+
+    def _generate_sovereignty_considerations(self, text: str, context: CulturalContext) -> List[str]:
+        """Generate sovereignty considerations."""
+        considerations = []
+        
+        for requirement, value in context.sovereignty_requirements.items():
+            if value:
+                if requirement == "data_residency":
+                    considerations.append("Ensure data remains within national borders")
+                elif requirement == "community_consultation":
+                    considerations.append("Require community consultation for decisions")
+                elif requirement == "cultural_preservation":
+                    considerations.append("Preserve cultural practices and traditions")
+        
+        return considerations
+
+    def _identify_risk_factors(self, text: str, context: CulturalContext) -> List[str]:
+        """Identify cultural risk factors."""
+        risks = []
+        
+        if context.variant == CulturalVariant.UBUNTU and "individual" in text.lower():
+            risks.append("Individual approach may conflict with community values")
+        
+        if context.trade_context == TradeContext.COMPLIANCE and "flexible" in text.lower():
+            risks.append("Flexible approach may not meet strict compliance requirements")
+        
+        return risks
+
+    def _identify_opportunities(self, text: str, context: CulturalContext) -> List[str]:
+        """Identify cultural opportunities."""
+        opportunities = []
+        
+        if context.variant == CulturalVariant.UBUNTU and "community" in text.lower():
+            opportunities.append("Strong community alignment for collective success")
+        
+        if context.variant == CulturalVariant.GUANXI and "relationship" in text.lower():
+            opportunities.append("Relationship-based approach for long-term partnerships")
+        
+        return opportunities
+
     def _analyze_contextual_meaning(self, text: str, context: CulturalContext) -> Dict[str, Any]:
         """Analyze the contextual meaning of the text."""
         analysis = {
             "text_length": len(text),
             "word_count": len(text.split()),
-            "language": context.language,
             "region": context.region.value,
-            "variant": context.variant.value
+            "variant": context.variant.value,
+            "trade_context": context.trade_context.value,
+            "compliance_level": context.compliance_level.value
         }
 
-        # Analyze sentiment
-        positive_words = ["good", "great", "excellent", "wonderful", "amazing", "helpful"]
-        negative_words = ["bad", "terrible", "awful", "horrible", "difficult", "problem"]
-
-        text_lower = text.lower()
-        positive_count = sum(1 for word in positive_words if word in text_lower)
-        negative_count = sum(1 for word in negative_words if word in text_lower)
-
-        if positive_count > negative_count:
-            analysis["sentiment"] = "positive"
-        elif negative_count > positive_count:
-            analysis["sentiment"] = "negative"
-        else:
-            analysis["sentiment"] = "neutral"
-
         return analysis
-
-    def _identify_cultural_nuances(self, text: str, context: CulturalContext) -> List[str]:
-        """Identify cultural nuances in the text."""
-        nuances = []
-        text_lower = text.lower()
-
-        # Check for cultural-specific expressions
-        if context.variant == CulturalVariant.UBUNTU:
-            if "village" in text_lower or "community" in text_lower:
-                nuances.append("Community-focused expression")
-            if "respect" in text_lower or "elder" in text_lower:
-                nuances.append("Respect for tradition")
-
-        elif context.variant == CulturalVariant.JUGAAD:
-            if "creative" in text_lower or "solution" in text_lower:
-                nuances.append("Innovation-focused expression")
-            if "make do" in text_lower or "work with" in text_lower:
-                nuances.append("Resource optimization")
-
-        elif context.variant == CulturalVariant.GUANXI:
-            if "relationship" in text_lower or "connection" in text_lower:
-                nuances.append("Relationship-building expression")
-            if "trust" in text_lower or "honor" in text_lower:
-                nuances.append("Trust and honor focus")
-
-        return nuances
-
-    def _detect_trust_indicators(self, text: str, context: CulturalContext) -> List[str]:
-        """Detect trust indicators in the text."""
-        indicators = []
-        text_lower = text.lower()
-
-        # Trust-related keywords
-        trust_keywords = ["trust", "believe", "faith", "confidence", "rely", "depend"]
-
-        for keyword in trust_keywords:
-            if keyword in text_lower:
-                indicators.append(f"Trust indicator: {keyword}")
-
-        # Cultural trust patterns
-        if context.variant == CulturalVariant.UBUNTU:
-            if "community" in text_lower and "together" in text_lower:
-                indicators.append("Community trust pattern")
-
-        elif context.variant == CulturalVariant.GUANXI:
-            if "relationship" in text_lower and "long-term" in text_lower:
-                indicators.append("Relationship trust pattern")
-
-        return indicators
 
     def _insight_matches_text(self, insight: str, text: str) -> bool:
         """Check if a cultural insight is reflected in the text."""

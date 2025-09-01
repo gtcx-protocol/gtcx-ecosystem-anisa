@@ -1,0 +1,9 @@
+transformers==4.46.3
+tokenizers==0.20.3
+datasets==2.19.0
+evaluate==0.4.2
+accelerate==0.31.0
+torch
+tqdm
+rich
+

@@ -35,7 +35,7 @@ class IntelligenceService:
                     "Remember, what helps one helps all. Let's find the best path forward."
                 ]
             },
-            CulturalVariant.JUGAAD: {
+            CulturalVariant.JUGGAD: {
                 "greeting": [
                     "Namaste! I'm here to help you find creative solutions - that's the jugaad way!",
                     "Hello! Let's think outside the box and find innovative ways to solve your challenges.",
@@ -108,7 +108,7 @@ class IntelligenceService:
         # Cultural markers for responses
         self.cultural_markers = {
             CulturalVariant.UBUNTU: ["community", "together", "village", "harmony", "respect", "unity"],
-            CulturalVariant.JUGAAD: ["creative", "innovative", "resourceful", "solution", "smart", "clever"],
+            CulturalVariant.JUGGAD: ["creative", "innovative", "resourceful", "solution", "smart", "clever"],
             CulturalVariant.GUANXI: ["relationship", "connection", "trust", "honor", "network", "face"],
             CulturalVariant.JEITINHO: ["flexible", "creative", "smart", "solution", "workaround", "adaptable"],
             CulturalVariant.WASTA: ["connection", "influence", "network", "help", "support", "relationship"]
@@ -116,13 +116,14 @@ class IntelligenceService:
         
         self.logger.info("Intelligence Service initialized")
     
-    async def generate_cultural_response(
+    async def generate_intelligent_response(
         self, 
         user_input: str, 
         cultural_context: CulturalContext, 
+        auth_result: 'CulturalAuthentication',
         native_understanding: NativeUnderstanding
     ) -> IntelligentResponse:
-        """Generate a culturally intelligent response."""
+        """Generate a culturally intelligent response with GTCX integration."""
         try:
             # Determine response type based on input
             response_type = self._determine_response_type(user_input, native_understanding)
@@ -137,26 +138,40 @@ class IntelligenceService:
                 response_text, cultural_context, native_understanding
             )
             
-            # Extract cultural markers used
-            markers_used = self._extract_cultural_markers_used(response_text, cultural_context.variant)
+            # Generate GTCX-specific content
+            gtcx_integration_hints = self._generate_gtcx_integration_hints(cultural_context, native_understanding)
+            gtcx_recommendations = self._generate_gtcx_recommendations(cultural_context, native_understanding)
+            compliance_notes = self._generate_compliance_notes(cultural_context, native_understanding)
             
-            # Create response metadata
-            metadata = {
-                "response_type": response_type,
-                "generation_method": "template_based",
-                "enhancement_applied": True
-            }
+            # Generate cultural adaptation
+            cultural_adaptation = self._generate_cultural_adaptation(cultural_context, native_understanding)
+            
+            # Generate ecosystem compatibility
+            ecosystem_compatibility = self._generate_ecosystem_compatibility(cultural_context)
+            
+            # Generate sovereignty preservation
+            sovereignty_preservation = self._generate_sovereignty_preservation(cultural_context)
+            
+            # Generate community engagement
+            community_engagement = self._generate_community_engagement(cultural_context)
             
             return IntelligentResponse(
                 response_text=response_text,
-                cultural_variant=cultural_context.variant,
+                cultural_context=cultural_context,
                 authenticity_score=authenticity_score,
-                cultural_markers_used=markers_used,
-                response_metadata=metadata
+                trade_context=cultural_context.trade_context,
+                compliance_notes=compliance_notes,
+                gtcx_integration_hints=gtcx_integration_hints,
+                gtcx_recommendations=gtcx_recommendations,
+                cultural_adaptation=cultural_adaptation,
+                ecosystem_compatibility=ecosystem_compatibility,
+                sovereignty_preservation=sovereignty_preservation,
+                community_engagement=community_engagement,
+                headers={}
             )
             
         except Exception as e:
-            self.logger.error(f"Error generating cultural response: {e}")
+            self.logger.error(f"Error generating intelligent response: {e}")
             return self._create_error_response(cultural_context, str(e))
     
     def _determine_response_type(self, user_input: str, understanding) -> str:
@@ -255,3 +270,116 @@ class IntelligenceService:
             cultural_markers_used=["error_response"],
             response_metadata={"is_error": True, "error": error_message}
         )
+
+    def _generate_gtcx_integration_hints(self, context: CulturalContext, understanding: NativeUnderstanding) -> List[str]:
+        """Generate GTCX integration hints."""
+        hints = []
+        
+        for component in context.gtcx_components:
+            if component.value == "asm_pathways":
+                hints.append("Use ASM Pathways for community-validated mining operations")
+            elif component.value == "gci_compliance":
+                hints.append("Leverage GCI for cultural compliance scoring")
+            elif component.value == "panx_oracle":
+                hints.append("Utilize PANX Oracle for multi-stakeholder consensus")
+            elif component.value == "via_vxa":
+                hints.append("Use VIA/VXA for cultural context in field verification")
+        
+        return hints
+
+    def _generate_gtcx_recommendations(self, context: CulturalContext, understanding: NativeUnderstanding) -> List[str]:
+        """Generate GTCX-specific recommendations."""
+        recommendations = []
+        
+        if context.variant == CulturalVariant.UBUNTU:
+            recommendations.append("Prioritize community consultation in all GTCX operations")
+            recommendations.append("Use ASM Pathways for community-validated compliance")
+        
+        elif context.variant == CulturalVariant.GUANXI:
+            recommendations.append("Build relationship-based trust networks for GTCX adoption")
+            recommendations.append("Leverage existing business connections for market access")
+        
+        elif context.variant == CulturalVariant.JUGGAD:
+            recommendations.append("Apply creative problem-solving to GTCX integration challenges")
+            recommendations.append("Optimize resource usage in GTCX implementation")
+        
+        return recommendations
+
+    def _generate_compliance_notes(self, context: CulturalContext, understanding: NativeUnderstanding) -> List[str]:
+        """Generate compliance notes."""
+        notes = []
+        
+        for factor in context.cultural_compliance_factors:
+            if factor.value == "community_consent":
+                notes.append("Require community consultation for compliance validation")
+            elif factor.value == "traditional_practices":
+                notes.append("Respect traditional practices in compliance processes")
+            elif factor.value == "local_authority":
+                notes.append("Include local authority in compliance decisions")
+        
+        return notes
+
+    def _generate_cultural_adaptation(self, context: CulturalContext, understanding: NativeUnderstanding) -> Dict[str, Any]:
+        """Generate cultural adaptation strategies."""
+        adaptation = {
+            "communication_style": "formal",
+            "decision_making": "individual",
+            "relationship_focus": "transactional"
+        }
+        
+        if context.variant == CulturalVariant.UBUNTU:
+            adaptation.update({
+                "communication_style": "community-oriented",
+                "decision_making": "collective",
+                "relationship_focus": "communal"
+            })
+        elif context.variant == CulturalVariant.GUANXI:
+            adaptation.update({
+                "communication_style": "relationship-focused",
+                "decision_making": "network-based",
+                "relationship_focus": "long-term"
+            })
+        
+        return adaptation
+
+    def _generate_ecosystem_compatibility(self, context: CulturalContext) -> Dict[str, Dict[str, Any]]:
+        """Generate ecosystem compatibility information."""
+        compatibility = {}
+        
+        for component in context.gtcx_components:
+            compatibility[component] = {
+                "integration_priority": "high" if component.value in ["panx_oracle", "gci_compliance"] else "medium",
+                "cultural_fit": "excellent" if context.variant == CulturalVariant.UBUNTU else "good",
+                "implementation_complexity": "medium"
+            }
+        
+        return compatibility
+
+    def _generate_sovereignty_preservation(self, context: CulturalContext) -> Dict[str, Any]:
+        """Generate sovereignty preservation measures."""
+        preservation = {
+            "data_residency": True,
+            "cultural_preservation": True,
+            "local_authority": True
+        }
+        
+        for requirement, value in context.sovereignty_requirements.items():
+            preservation[requirement] = value
+        
+        return preservation
+
+    def _generate_community_engagement(self, context: CulturalContext) -> Dict[str, Any]:
+        """Generate community engagement strategies."""
+        engagement = {
+            "stakeholder_involvement": "high",
+            "consultation_frequency": "regular",
+            "decision_transparency": "high"
+        }
+        
+        if context.variant == CulturalVariant.UBUNTU:
+            engagement.update({
+                "community_consent": True,
+                "traditional_authority": True
+            })
+        
+        return engagement

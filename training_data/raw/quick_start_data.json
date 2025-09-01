@@ -1,0 +1,74 @@
+[
+  {
+    "text": "We need to consult with the community before making any decisions about mining operations.",
+    "cultural_context": "ubuntu",
+    "region": "west_africa",
+    "trade_context": "mining",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "Benefits should be shared with the entire community, not just a few individuals.",
+    "cultural_context": "ubuntu",
+    "region": "west_africa",
+    "trade_context": "benefit_sharing",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "Let's build relationships first before discussing business terms.",
+    "cultural_context": "guanxi",
+    "region": "east_asia",
+    "trade_context": "trade",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "Preserve face and maintain honor in all negotiations.",
+    "cultural_context": "guanxi",
+    "region": "east_asia",
+    "trade_context": "negotiation",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "We can find a creative solution with limited resources.",
+    "cultural_context": "jugaad",
+    "region": "south_asia",
+    "trade_context": "innovation",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "We need to find a flexible way around this bureaucratic obstacle.",
+    "cultural_context": "jeitinho",
+    "region": "latin_america",
+    "trade_context": "bureaucracy",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "Use trusted relationships to facilitate approvals respectfully.",
+    "cultural_context": "wasta",
+    "region": "middle_east",
+    "trade_context": "approval",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "I'll take responsibility and proceed independently.",
+    "cultural_context": "individualism",
+    "region": "north_america",
+    "trade_context": "decision_making",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  },
+  {
+    "text": "We should reach group consensus before proceeding.",
+    "cultural_context": "collectivism",
+    "region": "europe",
+    "trade_context": "decision_making",
+    "source": "seed_example",
+    "created_at": "2025-09-01T20:33:17.685396"
+  }
+]
