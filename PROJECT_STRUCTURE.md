@@ -59,6 +59,8 @@ gtcx-ecosystem-anisa/
 ├── 📋 examples/                          # Example implementations
 │   └── test_anisa_basic.py               # Basic usage examples
 ├── 🐳 anisa-venv/                        # Python virtual environment
+├── 🧠 training_data/                      # Training datasets (raw/processed/validated)
+├── 🗂️ models/                            # Saved model artifacts
 └── .gitignore                            # Git ignore rules
 ```
 
@@ -168,4 +170,5 @@ cd scripts/
 ---
 
 **This structure transforms ANISA from a collection of files into a professional, enterprise-grade system that's easy to navigate, maintain, and scale.** 🚀
+
 
