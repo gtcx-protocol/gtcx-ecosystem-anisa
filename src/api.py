@@ -145,13 +145,13 @@ async def health_check():
 
 
 @app.post("/api/v1/query", response_model=QueryResponse, dependencies=[Depends(verify_api_key)])
-async def process_cultural_query(request: QueryRequest, response: Response):
+async def process_cultural_query(request: QueryRequest, http_response: Response):
     """Process a cultural query and return an intelligent response."""
     start_time = datetime.now()
     
     try:
         # Process the query
-        response = await core.process_cultural_query(request.text, request.language)
+        response_obj = await core.process_cultural_query(request.text, request.language)
         
         # Calculate processing time
         processing_time = (datetime.now() - start_time).total_seconds()
@@ -159,9 +159,9 @@ async def process_cultural_query(request: QueryRequest, response: Response):
         # Get cultural context
         context = await core.detect_cultural_context(request.text, request.language)
         # Set helpful response headers for gateways/policies
-        response.headers["X-ANISA-Region"] = context.region.value
-        response.headers["X-ANISA-Variant"] = context.variant.value
-        response.headers["X-ANISA-Authenticity"] = f"{response.authenticity_score:.2f}"
+        http_response.headers["X-ANISA-Region"] = context.region.value
+        http_response.headers["X-ANISA-Variant"] = context.variant.value
+        http_response.headers["X-ANISA-Authenticity"] = f"{response_obj.authenticity_score:.2f}"
 
         # Telemetry event
         publish_event(
@@ -171,15 +171,15 @@ async def process_cultural_query(request: QueryRequest, response: Response):
                 "region": context.region.value,
                 "variant": context.variant.value,
                 "processing_time": processing_time,
-                "authenticity_score": response.authenticity_score,
+                "authenticity_score": response_obj.authenticity_score,
             },
         )
 
         return QueryResponse(
-            response_text=response.response_text,
-            cultural_variant=response.cultural_variant.value,
-            authenticity_score=response.authenticity_score,
-            cultural_markers_used=response.cultural_markers_used,
+            response_text=response_obj.response_text,
+            cultural_variant=response_obj.cultural_variant.value,
+            authenticity_score=response_obj.authenticity_score,
+            cultural_markers_used=response_obj.cultural_markers_used,
             processing_time=processing_time,
             cultural_context={
                 "region": context.region.value,
