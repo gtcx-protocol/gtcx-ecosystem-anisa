@@ -9,12 +9,12 @@ import time
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
-from .models import (
+from models import (
     CulturalContext, CulturalAuthentication, NativeUnderstanding, 
     IntelligentResponse, CulturalRegion, CulturalVariant
 )
-from .config import ANISAConfig
-from .services import (
+from config import ANISAConfig
+from services import (
     CulturalAuthenticationService, NativeLanguageService, IntelligenceService
 )
 

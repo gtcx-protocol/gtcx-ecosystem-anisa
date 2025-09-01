@@ -4,8 +4,8 @@ Native Language Service
 
 import logging
 from typing import List, Dict, Any
-from ..models import CulturalContext, NativeUnderstanding, CulturalRegion, CulturalVariant
-from ..config import ANISAConfig
+from models import CulturalContext, NativeUnderstanding, CulturalRegion, CulturalVariant
+from config import ANISAConfig
 
 
 class NativeLanguageService:

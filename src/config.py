@@ -61,7 +61,7 @@ class ANISAConfig:
             log_level=os.getenv("ANISA_LOG_LEVEL", "INFO"),
             enable_structured_logging=os.getenv("ANISA_ENABLE_STRUCTURED_LOGGING", "true").lower() == "true",
             log_format=os.getenv("ANISA_LOG_FORMAT", "json"),
-            default_variant=os.getenv("ANISA_ENABLE_VARIANT_SWITCHING", "true").lower() == "true",
+            default_variant=os.getenv("ANISA_DEFAULT_VARIANT", "ubuntu"),
             enable_variant_switching=os.getenv("ANISA_ENABLE_VARIANT_SWITCHING", "true").lower() == "true",
             variant_confidence_threshold=float(os.getenv("ANISA_VARIANT_CONFIDENCE_THRESHOLD", "0.8"))
         )

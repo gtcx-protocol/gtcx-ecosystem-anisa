@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANISA - Cultural Intelligence Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .cultural-card {
+            transition: all 0.3s ease;
+        }
+        .cultural-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .typing-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4">
+                <i class="fas fa-globe-americas mr-4"></i>
+                ANISA
+            </h1>
+            <p class="text-xl mb-2">Authentic Native Intelligence Systematically Applied</p>
+            <p class="text-lg opacity-90">Experience Cultural Intelligence Across 5 Cultural Variants</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Cultural Variants Overview -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                <i class="fas fa-culture mr-3"></i>
+                Cultural Variants
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Ubuntu -->
+                <div class="cultural-card bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-users text-green-600 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold text-green-800">Ubuntu</h3>
+                    </div>
+                    <p class="text-green-700 mb-3"><strong>Meaning:</strong> "I am because we are"</p>
+                    <p class="text-green-600 text-sm">West African approach emphasizing community, collective wisdom, and harmony.</p>
+                </div>
+
+                <!-- Jugaad -->
+                <div class="cultural-card bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lightbulb text-yellow-600 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold text-yellow-800">Jugaad</h3>
+                    </div>
+                    <p class="text-yellow-700 mb-3"><strong>Meaning:</strong> "Creative problem solving"</p>
+                    <p class="text-yellow-600 text-sm">South Asian approach focusing on innovation through constraints and resource optimization.</p>
+                </div>
+
+                <!-- Guanxi -->
+                <div class="cultural-card bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-handshake text-red-600 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold text-red-800">Guanxi</h3>
+                    </div>
+                    <p class="text-red-700 mb-3"><strong>Meaning:</strong> "Relationship building"</p>
+                    <p class="text-red-600 text-sm">East Asian approach emphasizing trust, reciprocity, and long-term connections.</p>
+                </div>
+
+                <!-- Jeitinho -->
+                <div class="cultural-card bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-magic text-orange-600 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold text-orange-800">Jeitinho</h3>
+                    </div>
+                    <p class="text-orange-700 mb-3"><strong>Meaning:</strong> "Creative workarounds"</p>
+                    <p class="text-orange-600 text-sm">Latin American approach focusing on flexible solutions and smart problem solving.</p>
+                </div>
+
+                <!-- Wasta -->
+                <div class="cultural-card bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-network-wired text-blue-600 text-2xl mr-3"></i>
+                        <h3 class="text-xl font-semibold text-blue-800">Wasta</h3>
+                    </div>
+                    <p class="text-blue-700 mb-3"><strong>Meaning:</strong> "Using connections and influence"</p>
+                    <p class="text-blue-600 text-sm">Middle Eastern approach emphasizing network utilization and social capital.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demo -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                <i class="fas fa-robot mr-3"></i>
+                Interactive Cultural Intelligence Demo
+            </h2>
+            
+            <!-- Query Input -->
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="mb-6">
+                    <label for="queryInput" class="block text-lg font-semibold text-gray-700 mb-3">
+                        Ask ANISA a question:
+                    </label>
+                    <div class="flex gap-4">
+                        <input 
+                            type="text" 
+                            id="queryInput" 
+                            placeholder="e.g., How can I build a strong community?"
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                        <button 
+                            onclick="processQuery()" 
+                            id="submitBtn"
+                            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition-colors"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Ask ANISA
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Examples -->
+                <div class="mb-6">
+                    <p class="text-sm text-gray-600 mb-3">Quick examples:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setExample(this)" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            How can I build a strong community?
+                        </button>
+                        <button onclick="setExample(this)" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            What's the most creative way to solve problems?
+                        </button>
+                        <button onclick="setExample(this)" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            How do I build trust in relationships?
+                        </button>
+                        <button onclick="setExample(this)" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            What's the smart way to handle challenges?
+                        </button>
+                        <button onclick="setExample(this)" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            How can I use my network effectively?
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Response Display -->
+                <div id="responseArea" class="hidden">
+                    <div class="border-t pt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-brain mr-2"></i>
+                            ANISA's Cultural Response
+                        </h3>
+                        
+                        <!-- Cultural Context -->
+                        <div id="culturalContext" class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Response Text -->
+                        <div id="responseText" class="mb-4 p-4 bg-blue-50 rounded-lg">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Cultural Markers -->
+                        <div id="culturalMarkers" class="mb-4 p-4 bg-green-50 rounded-lg">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Authenticity Score -->
+                        <div id="authenticityScore" class="p-4 bg-purple-50 rounded-lg">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Results -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                <i class="fas fa-chart-bar mr-3"></i>
+                Demo Results
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                        <i class="fas fa-robot text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Total Queries</h3>
+                        <p id="totalQueries" class="text-3xl font-bold text-blue-600">0</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                        <i class="fas fa-bullseye text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Success Rate</h3>
+                        <p id="successRate" class="text-3xl font-bold text-green-600">100%</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                        <i class="fas fa-tachometer-alt text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Avg Response Time</h3>
+                        <p id="avgResponseTime" class="text-3xl font-bold text-purple-600">0ms</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Status -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                <i class="fas fa-server mr-3"></i>
+                API Status
+            </h2>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">ANISA API Server</h3>
+                        <p class="text-gray-600">Cultural Intelligence API endpoints</p>
+                    </div>
+                    <div id="apiStatus" class="flex items-center">
+                        <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                        <span class="text-red-600 font-semibold">Offline</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-3">Available Endpoints:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">POST /api/v1/query</code> - Process cultural queries</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/v1/status</code> - System status</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">GET /api/v1/variants</code> - Cultural variants</li>
+                            <li><code class="bg-gray-100 px-2 py-1 rounded">POST /api/v1/insights</code> - Cultural insights</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-3">Quick Start:</h4>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600 mb-2">Start the API server:</p>
+                            <code class="bg-gray-200 px-2 py-1 rounded text-sm block">python start_api.py</code>
+                            <p class="text-sm text-gray-600 mt-2">Then visit: <a href="http://localhost:8000/docs" class="text-blue-600 hover:underline">http://localhost:8000/docs</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-2">ANISA - Authentic Native Intelligence Systematically Applied</p>
+            <p class="text-gray-400">GTCX Protocol Ecosystem</p>
+        </div>
+    </footer>
+
+    <script>
+        let queryCount = 0;
+        let successCount = 0;
+        let totalResponseTime = 0;
+
+        // Set example query
+        function setExample(button) {
+            document.getElementById('queryInput').value = button.textContent;
+        }
+
+        // Process query
+        async function processQuery() {
+            const queryInput = document.getElementById('queryInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const responseArea = document.getElementById('responseArea');
+            
+            const query = queryInput.value.trim();
+            if (!query) {
+                alert('Please enter a question');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="typing-indicator"></div> Processing...';
+            
+            try {
+                const startTime = Date.now();
+                
+                // Simulate API call (replace with actual API endpoint when server is running)
+                const response = await simulateANISAResponse(query);
+                
+                const responseTime = Date.now() - startTime;
+                totalResponseTime += responseTime;
+                queryCount++;
+                successCount++;
+                
+                // Update metrics
+                updateMetrics();
+                
+                // Display response
+                displayResponse(response, responseTime);
+                responseArea.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error processing query. Please try again.');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Ask ANISA';
+            }
+        }
+
+        // Simulate ANISA response (replace with actual API call)
+        async function simulateANISAResponse(query) {
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Simple cultural detection logic
+            const culturalVariants = {
+                'ubuntu': {
+                    region: 'west_africa',
+                    variant: 'ubuntu',
+                    meaning: 'I am because we are',
+                    color: 'green'
+                },
+                'jugaad': {
+                    region: 'south_asia',
+                    variant: 'jugaad',
+                    meaning: 'Creative problem solving',
+                    color: 'yellow'
+                },
+                'guanxi': {
+                    region: 'east_asia',
+                    variant: 'guanxi',
+                    meaning: 'Relationship building',
+                    color: 'red'
+                },
+                'jeitinho': {
+                    region: 'latin_america',
+                    variant: 'jeitinho',
+                    meaning: 'Creative workarounds',
+                    color: 'orange'
+                },
+                'wasta': {
+                    region: 'middle_east',
+                    variant: 'wasta',
+                    meaning: 'Using connections and influence',
+                    color: 'blue'
+                }
+            };
+
+            // Detect cultural variant based on keywords
+            let detectedVariant = 'ubuntu'; // default
+            const queryLower = query.toLowerCase();
+            
+            if (queryLower.includes('creative') || queryLower.includes('innovative') || queryLower.includes('resourceful')) {
+                detectedVariant = 'jugaad';
+            } else if (queryLower.includes('relationship') || queryLower.includes('trust') || queryLower.includes('connection')) {
+                detectedVariant = 'guanxi';
+            } else if (queryLower.includes('smart') || queryLower.includes('workaround') || queryLower.includes('flexible')) {
+                detectedVariant = 'jeitinho';
+            } else if (queryLower.includes('network') || queryLower.includes('influence') || queryLower.includes('connections')) {
+                detectedVariant = 'wasta';
+            } else if (queryLower.includes('community') || queryLower.includes('together') || queryLower.includes('harmony')) {
+                detectedVariant = 'ubuntu';
+            }
+
+            const variant = culturalVariants[detectedVariant];
+            
+            // Generate response based on variant
+            const responses = {
+                'ubuntu': [
+                    "In the spirit of Ubuntu, we believe that 'I am because we are.' Let us work together to find solutions that benefit our entire community.",
+                    "Together we can overcome this challenge. What have you tried so far? Remember, the village raises the child.",
+                    "Let us think about this collectively. In our community, we find wisdom through shared experience and mutual respect."
+                ],
+                'jugaad': [
+                    "With jugaad thinking, we approach this creatively and resourcefully. What constraints are you working with?",
+                    "Let's think outside the box! Sometimes the most innovative solutions come from working with limitations.",
+                    "Be resourceful with what you have. Jugaad teaches us that constraints often lead to the most creative solutions."
+                ],
+                'guanxi': [
+                    "In guanxi, we understand that relationships are the foundation of success. Let's build trust first.",
+                    "Building connections takes time, but they open doors. Who do you know who might help?",
+                    "Maintain face and honor in all dealings. Long-term relationships are built on trust and reciprocity."
+                ],
+                'jeitinho': [
+                    "With jeitinho, we find smart, flexible solutions. What's your specific situation?",
+                    "Sometimes the best solution is the most creative one. Be flexible and adapt to the circumstances.",
+                    "Find your own path. Jeitinho is about personal, creative solutions that work for you."
+                ],
+                'wasta': [
+                    "Your network is your strength. Who in your connections can help with this?",
+                    "Influence and connections open doors. Let's find the right approach through your network.",
+                    "Build social capital by helping others. Your network will support you in return."
+                ]
+            };
+
+            const responseText = responses[detectedVariant][Math.floor(Math.random() * responses[detectedVariant].length)];
+            
+            return {
+                cultural_context: variant,
+                response_text: responseText,
+                authenticity_score: 0.85 + Math.random() * 0.1,
+                cultural_markers_used: getCulturalMarkers(query, detectedVariant),
+                processing_time: 0.5
+            };
+        }
+
+        // Get cultural markers
+        function getCulturalMarkers(query, variant) {
+            const markers = {
+                'ubuntu': ['community', 'together', 'harmony', 'collective'],
+                'jugaad': ['creative', 'innovative', 'resourceful', 'constraints'],
+                'guanxi': ['relationship', 'trust', 'connection', 'honor'],
+                'jeitinho': ['smart', 'flexible', 'creative', 'workaround'],
+                'wasta': ['network', 'influence', 'connection', 'help']
+            };
+            
+            const queryLower = query.toLowerCase();
+            return markers[variant].filter(marker => queryLower.includes(marker));
+        }
+
+        // Display response
+        function displayResponse(response, responseTime) {
+            const variant = response.cultural_context;
+            
+            // Cultural Context
+            document.getElementById('culturalContext').innerHTML = `
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-${variant.color}-500 rounded-full mr-3"></div>
+                    <div>
+                        <strong>Detected:</strong> ${variant.region.replace('_', ' ').toUpperCase()} - ${variant.variant.toUpperCase()}
+                        <br><em>${variant.meaning}</em>
+                    </div>
+                </div>
+            `;
+
+            // Response Text
+            document.getElementById('responseText').innerHTML = `
+                <strong>Response:</strong><br>
+                ${response.response_text}
+            `;
+
+            // Cultural Markers
+            document.getElementById('culturalMarkers').innerHTML = `
+                <strong>Cultural Markers:</strong><br>
+                ${response.cultural_markers_used.length > 0 ? 
+                    response.cultural_markers_used.map(marker => `<span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm mr-2 mb-2">${marker}</span>`).join('') : 
+                    'None detected'
+                }
+            `;
+
+            // Authenticity Score
+            const score = response.authenticity_score;
+            const scoreColor = score > 0.8 ? 'green' : score > 0.6 ? 'yellow' : 'red';
+            document.getElementById('authenticityScore').innerHTML = `
+                <strong>Authenticity Score:</strong><br>
+                <div class="flex items-center mt-2">
+                    <div class="flex-1 bg-gray-200 rounded-full h-3 mr-3">
+                        <div class="bg-${scoreColor}-500 h-3 rounded-full" style="width: ${score * 100}%"></div>
+                    </div>
+                    <span class="text-${scoreColor}-600 font-semibold">${(score * 100).toFixed(0)}%</span>
+                </div>
+                <p class="text-sm text-gray-600 mt-1">Response time: ${responseTime}ms</p>
+            `;
+        }
+
+        // Update metrics
+        function updateMetrics() {
+            document.getElementById('totalQueries').textContent = queryCount;
+            document.getElementById('successRate').textContent = '100%';
+            document.getElementById('avgResponseTime').textContent = `${Math.round(totalResponseTime / queryCount)}ms`;
+        }
+
+        // Check API status
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    document.getElementById('apiStatus').innerHTML = `
+                        <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                        <span class="text-green-600 font-semibold">Online</span>
+                    `;
+                }
+            } catch (error) {
+                // API is offline
+                document.getElementById('apiStatus').innerHTML = `
+                    <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                    <span class="text-red-600 font-semibold">Offline</span>
+                `;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check API status every 10 seconds
+            checkAPIStatus();
+            setInterval(checkAPIStatus, 10000);
+            
+            // Allow Enter key to submit
+            document.getElementById('queryInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    processQuery();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

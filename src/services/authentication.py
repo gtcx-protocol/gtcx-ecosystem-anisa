@@ -4,8 +4,8 @@ Cultural Authentication Service
 
 import logging
 from typing import List
-from ..models import CulturalContext, CulturalAuthentication, CulturalRegion, CulturalVariant
-from ..config import ANISAConfig
+from models import CulturalContext, CulturalAuthentication, CulturalRegion, CulturalVariant
+from config import ANISAConfig
 
 
 class CulturalAuthenticationService:
@@ -65,16 +65,16 @@ class CulturalAuthenticationService:
         try:
             input_lower = user_input.lower()
 
-            # Simple region detection
-            if any(word in input_lower for word in ["ubuntu", "village", "community", "harmony"]):
+            # Enhanced region detection with more specific keywords
+            if any(word in input_lower for word in ["ubuntu", "village", "community", "harmony", "together", "collective", "elders", "tradition"]):
                 return CulturalRegion.WEST_AFRICA
-            elif any(word in input_lower for word in ["jugaad", "creative", "innovative", "resourceful"]):
+            elif any(word in input_lower for word in ["jugaad", "creative", "innovative", "resourceful", "constraints", "optimization", "adaptability"]):
                 return CulturalRegion.SOUTH_ASIA
-            elif any(word in input_lower for word in ["guanxi", "relationship", "connection", "trust"]):
+            elif any(word in input_lower for word in ["guanxi", "relationship", "connection", "trust", "honor", "face", "long-term", "reciprocity"]):
                 return CulturalRegion.EAST_ASIA
-            elif any(word in input_lower for word in ["jeitinho", "flexible", "creative", "workaround"]):
+            elif any(word in input_lower for word in ["jeitinho", "flexible", "smart", "workaround", "challenge", "situation", "unconventional", "personal"]):
                 return CulturalRegion.LATIN_AMERICA
-            elif any(word in input_lower for word in ["wasta", "influence", "connection", "help"]):
+            elif any(word in input_lower for word in ["wasta", "influence", "network", "connections", "social capital", "assistance", "help"]):
                 return CulturalRegion.MIDDLE_EAST
             else:
                 return CulturalRegion.WEST_AFRICA  # Default

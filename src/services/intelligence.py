@@ -5,8 +5,8 @@ Intelligence Service
 import logging
 import random
 from typing import List, Dict, Any
-from ..models import CulturalContext, NativeUnderstanding, IntelligentResponse, CulturalVariant
-from ..config import ANISAConfig
+from models import CulturalContext, NativeUnderstanding, IntelligentResponse, CulturalVariant
+from config import ANISAConfig
 
 
 class IntelligenceService:
