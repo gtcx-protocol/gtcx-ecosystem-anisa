@@ -205,12 +205,12 @@ See docs: [Training Quick Start](docs/training_quick_start.md)
 
 ## 📚 **Documentation**
 
-- **[Product Vision & Strategy](docs/PRODUCT_VISION.md)** - ANISA's strategic vision and roadmap
-- **[User Journey Guide](docs/USER_JOURNEYS.md)** - Detailed user experience flows
-- **[GTCX Integration Guide](docs/GTCX_INTEGRATION.md)** - How to integrate ANISA with GTCX components
-- **[API Reference](docs/API_REFERENCE.md)** - Complete API documentation
-- **[Cultural Intelligence Framework](docs/CULTURAL_FRAMEWORK.md)** - Deep dive into cultural models
-- **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment instructions
+- **[Product Vision & Strategy](docs/product_vision.md)** - ANISA's strategic vision and roadmap
+- **[User Journey Guide](docs/user_journeys.md)** - Detailed user experience flows
+- **[GTCX Integration Guide](docs/gtcx_integration.md)** - How to integrate ANISA with GTCX components
+- **[API Reference](docs/api/README.md)** - API documentation index (coming soon)
+- **[Cultural Intelligence Framework](docs/technical/technical-specification.md)** - Technical specification
+- **[Deployment Guide](docs/deployment/deployment-strategy.md)** - Production deployment instructions
 
 ---
 
