@@ -43,8 +43,8 @@ This documentation hub provides comprehensive guides, references, and resources 
 | Document | Description | Audience | Complexity |
 |----------|-------------|----------|------------|
 | **[GTCX Integration Guide](gtcx_integration.md)** | Complete integration with GTCX ecosystem | Developers, architects | Advanced |
-| **[API Reference](api_reference.md)** | Complete API documentation and examples | Developers | Intermediate |
-| **[Cultural Framework](cultural_framework.md)** | Deep dive into cultural models and variants | Researchers, cultural experts | Intermediate |
+| **[API Reference](api/README.md)** | API documentation index (coming soon) | Developers | Intermediate |
+| **[Technical Specification](technical/technical-specification.md)** | System specification and cultural model mapping | Engineers, architects | Advanced |
 | **[Cultural Data Requirements](cultural_data_requirements.md)** | Critical analysis of cultural intelligence data needs | Researchers, developers, stakeholders | Advanced |
 | **[Implementation Plan](cultural_intelligence_implementation_plan.md)** | Roadmap for authentic cultural intelligence | Project managers, developers, stakeholders | Advanced |
 | **[AI Training Framework](ai_training_framework.md)** | How to train AI systems for authentic cultural intelligence | AI researchers, developers, stakeholders | Advanced |
@@ -279,7 +279,7 @@ This documentation is updated regularly to reflect the latest ANISA capabilities
 
 ### **For Developers**
 1. **Set up development environment** using [README](../README.md)
-2. **Explore [API Reference](api_reference.md)** for integration options
+2. **Explore [API Reference](api/README.md)** for integration options (coming soon)
 3. **Review [GTCX Integration Guide](gtcx_integration.md)** for technical patterns
 4. **Check [Architecture Guide](architecture.md)** for system design
 
