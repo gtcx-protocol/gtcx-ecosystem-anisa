@@ -1159,8 +1159,8 @@ Expected Results:
 
 ## 📚 **References**
 
-- [ANISA Technical Specification](technical-specification.md)
-- [ANISA Deployment Strategy](deployment-strategy.md)
+- [ANISA Technical Specification](../technical/technical-specification.md)
+- [ANISA Deployment Strategy](../deployment/deployment-strategy.md)
 - [GTCX Ecosystem Documentation](https://github.com/gtcx-protocol/gtcx-protocol-ecosystem)
 - [Cultural Intelligence Research](https://en.wikipedia.org/wiki/Cultural_intelligence)
 - [Product Management Best Practices](https://www.atlassian.com/agile/product-management)

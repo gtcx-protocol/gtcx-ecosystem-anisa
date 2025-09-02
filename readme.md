@@ -300,7 +300,7 @@ pytest tests/test_core.py
 
 ## 🤝 **Contributing**
 
-We welcome contributions from the GTCX ecosystem community! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions from the GTCX ecosystem community! Please see our Contributing Guide in the repo root (to be added) for details.
 
 ### **Areas of Contribution**
 
@@ -314,7 +314,7 @@ We welcome contributions from the GTCX ecosystem community! Please see our [Cont
 
 ## 📄 **License**
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License (LICENSE file in repo root).
 
 ---
 
