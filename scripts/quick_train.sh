@@ -24,3 +24,4 @@ python scripts/quick_start_training.py
 echo "✅ Training complete"
 
 
+
