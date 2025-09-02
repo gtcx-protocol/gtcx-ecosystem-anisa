@@ -57,6 +57,15 @@ This documentation hub provides comprehensive guides, references, and resources 
 | **[Interim Strategy](interim_implementation_strategy.md)** | Practical steps while authentic data is built |
 | **[AI Training Framework](ai_training_framework.md)** | Community-validated training approach |
 
+### **📘 Agile‑PM Guides**
+| Document | Description |
+|----------|-------------|
+| **[User Guide](../agile-pm/user_guide.md)** | What ANISA does and how to call the APIs |
+| **[Agent Integration Guide](../agile-pm/agent_guide.md)** | PANX↔ANISA surfaces, headers, retries |
+| **[Runbook](../agile-pm/runbook.md)** | Ops: start/stop, rotate keys, logs |
+| **[Deploy on GCP VM](../agile-pm/deploy_gcp_vm.md)** | Step‑by‑step VM deployment |
+| **[Training Quickstart Ops](../agile-pm/training_quickstart_ops.md)** | Running the local training pipeline |
+
 ### **📖 User Guides**
 | Document | Description | Audience | Complexity |
 |----------|-------------|----------|------------|
