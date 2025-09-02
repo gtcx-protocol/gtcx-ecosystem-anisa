@@ -212,6 +212,8 @@ See docs: [Training Quick Start](docs/training_quick_start.md)
 - **[Cultural Intelligence Framework](docs/technical/technical-specification.md)** - Technical specification
 - **[Deployment Guide](docs/deployment/deployment-strategy.md)** - Production deployment instructions
 
+Changelog: see `CHANGELOG.md`.
+
 ---
 
 ## 🔧 **Development**
