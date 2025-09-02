@@ -1,0 +1,13 @@
+{
+  "event_type": "export_permit_issued",
+  "region": "west_africa",
+  "trade_context": "compliance",
+  "evidence": {
+    "permit_document": "hash:abc123",
+    "compliance_score": 0.82,
+    "inspection_report": "hash:def456"
+  }
+}
+
+
+
