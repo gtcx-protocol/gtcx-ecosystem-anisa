@@ -1043,8 +1043,8 @@ execution_workflow:
 
 ## 📚 **References**
 
-- [ANISA Technical Specification](technical-specification.md)
-- [ANISA Product Requirements Document](product-requirements-document.md)
+- [ANISA Technical Specification](../../technical/technical-specification.md)
+- [ANISA Product Requirements Document](../../business/product-requirements-document.md)
 - [Testing Best Practices](https://www.atlassian.com/agile/software-testing)
 - [Cultural Testing Guidelines](https://en.wikipedia.org/wiki/Cultural_testing)
 - [Performance Testing Standards](https://www.performance-testing.org/)

@@ -828,9 +828,9 @@ cultural_mitigation:
 
 ## 📚 **References**
 
-- [ANISA Technical Specification](technical-specification.md)
-- [ANISA Product Requirements Document](product-requirements-document.md)
-- [ANISA Testing Strategy](testing-strategy.md)
+- [ANISA Technical Specification](../../technical/technical-specification.md)
+- [ANISA Product Requirements Document](../../business/product-requirements-document.md)
+- [ANISA Testing Strategy](../../qa/test-plans/testing-strategy.md)
 - [Release Management Best Practices](https://www.atlassian.com/agile/release-management)
 - [Cultural Project Management](https://en.wikipedia.org/wiki/Cultural_project_management)
 

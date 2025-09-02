@@ -74,7 +74,7 @@ This documentation hub provides comprehensive guides, references, and resources 
 ### **🚀 Deployment & Operations**
 | Document | Description | Audience | Complexity |
 |----------|-------------|----------|------------|
-| **[Deployment Guide](deployment.md)** | Production deployment instructions | DevOps engineers, administrators | Advanced |
+| **Deployment Guide (see deployment/deployment-strategy.md)** | Production deployment instructions | DevOps engineers, administrators | Advanced |
 | **[Operations Manual](operations.md)** | Day-to-day operations and monitoring | Operations teams | Intermediate |
 | **[Security Guide](security.md)** | Security best practices and compliance | Security teams, administrators | Advanced |
 
@@ -90,13 +90,13 @@ This documentation hub provides comprehensive guides, references, and resources 
 
 ### **For Developers & Engineers**
 1. **Quick Start**: [README](../README.md) - Setup and basic usage
-2. **API Reference**: [API Reference](api_reference.md) - Complete API documentation
+2. **API Reference**: [API Reference](api/README.md) - Complete API documentation (index)
 3. **Integration**: [GTCX Integration Guide](gtcx_integration.md) - Technical integration patterns
 4. **Architecture**: [Architecture Guide](architecture.md) - System design and principles
 
 ### **For System Administrators**
 1. **Overview**: [README](../README.md) - System capabilities and requirements
-2. **Deployment**: [Deployment Guide](deployment.md) - Production deployment instructions
+2. **Deployment**: [Deployment Guide](deployment/deployment-strategy.md) - Production deployment instructions
 3. **Operations**: [Operations Manual](operations.md) - Day-to-day operations
 4. **Security**: [Security Guide](security.md) - Security best practices
 
@@ -262,7 +262,7 @@ print(f"Cultural Authenticity: {response.cultural_authentication.confidence_scor
 - **Email Support**: anisa@gtcx.org
 
 ### **Contributing to Documentation**
-We welcome contributions to improve ANISA documentation! Please see our [Contributing Guide](../CONTRIBUTING.md) for details.
+We welcome contributions to improve ANISA documentation! Please see our Contributing Guide (to be added at repo root) for details.
 
 ### **Documentation Updates**
 This documentation is updated regularly to reflect the latest ANISA capabilities and GTCX ecosystem integration features.

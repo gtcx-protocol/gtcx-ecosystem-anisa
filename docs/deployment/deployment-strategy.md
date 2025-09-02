@@ -844,7 +844,7 @@ monthly_costs:
 
 ## 📚 **References**
 
-- [ANISA Technical Specification](technical-specification.md)
+- [ANISA Technical Specification](../technical/technical-specification.md)
 - [GTCX Ecosystem Documentation](https://github.com/gtcx-protocol/gtcx-protocol-ecosystem)
 - [Cultural Intelligence Research](https://en.wikipedia.org/wiki/Cultural_intelligence)
 - [Deployment Best Practices](https://kubernetes.io/docs/concepts/overview/)
