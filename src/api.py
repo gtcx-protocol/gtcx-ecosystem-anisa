@@ -15,7 +15,14 @@ from pydantic import BaseModel, Field
 
 from core import ANISACore
 from config import ANISAConfig
-from models import CulturalContext, CulturalRegion, CulturalVariant
+from models import (
+    CulturalContext,
+    CulturalRegion,
+    CulturalVariant,
+    TradeContext,
+    ComplianceLevel,
+    GTCEcosystemComponent,
+)
 
 
 # Pydantic models for API requests/responses
@@ -65,6 +72,44 @@ class PerformanceMetricsResponse(BaseModel):
     failed_queries: int = Field(..., description="Failed queries")
     average_response_time: float = Field(..., description="Average response time in seconds")
     start_time: datetime = Field(..., description="System start time")
+
+
+# PANX integration models
+class PanxToolFunction(BaseModel):
+    name: str
+    description: str
+    input_schema: Dict[str, Any]
+    output_schema: Dict[str, Any]
+
+
+class PanxAnalyzeRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=2000)
+    language: str = Field(default="en", max_length=10)
+    region_hint: Optional[str] = Field(default=None, description="Optional region hint")
+
+
+class PanxAnalyzeResponse(BaseModel):
+    authenticity_score: float
+    detected_region: str
+    detected_variant: str
+    compliance_notes: List[str] = []
+    recommendations: List[str] = []
+
+
+class PanxVerificationEvent(BaseModel):
+    event_type: str = Field(..., description="Verification event type (e.g., export_permit_issued)")
+    region: str = Field(..., description="Cultural region value")
+    trade_context: str = Field(..., description="Trade context value")
+    evidence: Dict[str, Any] = Field(default_factory=dict, description="Evidence package")
+
+
+class PanxConsensusHint(BaseModel):
+    recommended_validators: List[str]
+    minimum_consensus: float
+    cultural_risks: List[str] = []
+    compliance_notes: List[str] = []
+    region: str
+    variant: str
 
 
 # Initialize FastAPI app
@@ -336,43 +381,146 @@ async def describe_panx_tool() -> Dict[str, Any]:
     Provides a stable contract PANX can use to invoke ANISA.
     """
     return {
-        "name": "anisa.cultural_query",
+        "name": "anisa.cultural_intelligence",
         "version": "1.0",
-        "description": "Generate culturally authentic responses with region/variant detection and scores.",
-        "invoke": {
-            "method": "POST",
-            "path": "/api/v1/query",
-            "auth": {"type": "api_key", "in": "header", "name": "X-API-Key"},
-        },
-        "inputs_schema": {
-            "type": "object",
-            "required": ["text"],
-            "properties": {
-                "text": {"type": "string", "minLength": 1, "maxLength": 1000},
-                "language": {"type": "string", "default": "en", "maxLength": 10},
-                "cultural_variant": {"type": "string", "nullable": True},
-            },
-        },
-        "outputs_schema": {
-            "type": "object",
-            "properties": {
-                "response_text": {"type": "string"},
-                "cultural_variant": {"type": "string"},
-                "authenticity_score": {"type": "number"},
-                "cultural_markers_used": {"type": "array", "items": {"type": "string"}},
-                "processing_time": {"type": "number"},
-                "cultural_context": {
+        "description": "Cultural analysis, event assessment hints, and query generation for GTCX.",
+        "auth": {"type": "api_key", "in": "header", "name": "X-API-Key"},
+        "functions": [
+            {
+                "name": "query",
+                "method": "POST",
+                "path": "/api/v1/query",
+                "input_schema": {
                     "type": "object",
+                    "required": ["text"],
                     "properties": {
-                        "region": {"type": "string"},
-                        "variant": {"type": "string"},
-                        "language": {"type": "string"},
-                        "dialect": {"type": "string", "nullable": True},
+                        "text": {"type": "string", "minLength": 1, "maxLength": 1000},
+                        "language": {"type": "string", "default": "en", "maxLength": 10},
+                        "cultural_variant": {"type": "string"},
                     },
                 },
+                "output_schema": {"type": "object"},
             },
-        },
+            {
+                "name": "analyze",
+                "method": "POST",
+                "path": "/api/v1/panx/analyze",
+                "input_schema": {
+                    "type": "object",
+                    "required": ["text"],
+                    "properties": {
+                        "text": {"type": "string", "minLength": 1, "maxLength": 2000},
+                        "language": {"type": "string", "default": "en", "maxLength": 10},
+                        "region_hint": {"type": "string"},
+                    },
+                },
+                "output_schema": {"type": "object"},
+            },
+            {
+                "name": "event_assess",
+                "method": "POST",
+                "path": "/api/v1/panx/event/assess",
+                "input_schema": {
+                    "type": "object",
+                    "required": ["event_type", "region", "trade_context"],
+                    "properties": {
+                        "event_type": {"type": "string"},
+                        "region": {"type": "string"},
+                        "trade_context": {"type": "string"},
+                        "evidence": {"type": "object"},
+                    },
+                },
+                "output_schema": {"type": "object"},
+            },
+        ],
     }
+
+
+@app.post("/api/v1/panx/analyze", response_model=PanxAnalyzeResponse, dependencies=[Depends(verify_api_key)])
+async def panx_analyze(req: PanxAnalyzeRequest):
+    """Analyze text for PANX: detect region/variant, compute authenticity, return notes."""
+    try:
+        # Detect context
+        context = await core.detect_cultural_context(
+            req.text,
+            TradeContext.COMPLIANCE,
+            ComplianceLevel.BASIC,
+            [GTCEcosystemComponent.PANX_ORACLE, GTCEcosystemComponent.GCI_COMPLIANCE],
+        )
+
+        # Generate response to obtain authenticity score and notes
+        response_obj = await core.process_cultural_query(
+            req.text,
+            TradeContext.COMPLIANCE,
+            ComplianceLevel.BASIC,
+            [GTCEcosystemComponent.PANX_ORACLE],
+        )
+
+        return PanxAnalyzeResponse(
+            authenticity_score=response_obj.authenticity_score,
+            detected_region=context.region.value,
+            detected_variant=context.variant.value,
+            compliance_notes=response_obj.compliance_notes,
+            recommendations=response_obj.gtcx_recommendations,
+        )
+    except Exception as e:
+        logger.error(f"Error in PANX analyze: {e}")
+        raise HTTPException(status_code=500, detail=f"Error in PANX analyze: {str(e)}")
+
+
+@app.post("/api/v1/panx/event/assess", response_model=PanxConsensusHint, dependencies=[Depends(verify_api_key)])
+async def panx_event_assess(evt: PanxVerificationEvent):
+    """Assess a PANX verification event and return consensus hints."""
+    try:
+        # Heuristic mapping for recommended validators and thresholds
+        event = evt.event_type.lower()
+        if event in {"export_permit_issued", "customs_clearance"}:
+            recommended = ["government", "enterprise"]
+            min_consensus = 0.75
+        elif event in {"payment_released", "settlement_completed"}:
+            recommended = ["enterprise", "community"]
+            min_consensus = 0.80
+        else:
+            recommended = ["government", "enterprise", "community", "academic"]
+            min_consensus = 0.67
+
+        # Derive region/variant basics
+        try:
+            region_enum = CulturalRegion(evt.region)
+        except Exception:
+            region_enum = CulturalRegion.NORTH_AMERICA
+        variant = {
+            CulturalRegion.WEST_AFRICA: "ubuntu",
+            CulturalRegion.SOUTH_ASIA: "jugaad",
+            CulturalRegion.EAST_ASIA: "guanxi",
+            CulturalRegion.LATIN_AMERICA: "jeitinho",
+            CulturalRegion.MIDDLE_EAST: "wasta",
+            CulturalRegion.NORTH_AMERICA: "individualism",
+            CulturalRegion.EUROPE: "collectivism",
+        }.get(region_enum, "individualism")
+
+        # Simple cultural risks based on sparse evidence
+        risks: List[str] = []
+        if "dispute" in event:
+            risks.append("Potential dispute escalation; ensure community validation")
+        if evt.evidence and "custody" not in evt.evidence.keys():
+            risks.append("Missing custody evidence; require VaultMark reference")
+
+        notes: List[str] = []
+        if evt.trade_context.lower() == TradeContext.COMPLIANCE.value:
+            notes.append("Prioritize regulatory and cultural compliance checks")
+
+        return PanxConsensusHint(
+            recommended_validators=recommended,
+            minimum_consensus=min_consensus,
+            cultural_risks=risks,
+            compliance_notes=notes,
+            region=region_enum.value,
+            variant=variant,
+        )
+    except Exception as e:
+        logger.error(f"Error in PANX event assess: {e}")
+        raise HTTPException(status_code=500, detail=f"Error in PANX event assess: {str(e)}")
 
 
 if __name__ == "__main__":

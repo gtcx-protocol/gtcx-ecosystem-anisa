@@ -1,0 +1,13 @@
+{
+  "name": "anisa.cultural_intelligence",
+  "version": "1.0",
+  "description": "Cultural analysis, event assessment hints, and query generation for GTCX.",
+  "auth": {"type": "api_key", "in": "header", "name": "X-API-Key"},
+  "functions": [
+    {"name": "query", "method": "POST", "path": "/api/v1/query"},
+    {"name": "analyze", "method": "POST", "path": "/api/v1/panx/analyze"},
+    {"name": "event_assess", "method": "POST", "path": "/api/v1/panx/event/assess"}
+  ]
+}
+
+
