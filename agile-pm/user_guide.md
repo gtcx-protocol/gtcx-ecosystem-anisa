@@ -3,6 +3,12 @@
 ## Overview
 ANISA provides cultural intelligence for the GTCX ecosystem. It enriches trade flows with cultural context, authenticity scoring, and compliance notes.
 
+## How it works (plain English)
+```
+Claim text or event → ANISA analyzes with regional/variant context → returns authenticity + notes
+```
+Typical use: PANX calls ANISA to add cultural/compliance guidance before finalizing consensus.
+
 ## Base URL
 - Example: `https://anisa.yourdomain` (replace with your deployment)
 
@@ -41,6 +47,9 @@ Body:
   "evidence": {"permit_document": "hash:abc123"}
 }
 ```
+
+## Real-world example
+- A permit description mentions community consultation. ANISA (region: West Africa) highlights Ubuntu norms, suggests engaging a local council, and adds compliance notes for PANX to include in its hints.
 
 ## Notes
 - Obtain the ANISA API key from your deployment operator.
