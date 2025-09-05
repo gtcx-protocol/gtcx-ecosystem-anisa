@@ -15,3 +15,4 @@ PYTHONPATH=src ANISA_API_KEY=<key> uvicorn src.api:app --host 0.0.0.0 --port 800
 ## Troubleshooting
 - Import errors: ensure `PYTHONPATH=src` and correct absolute imports.
 - 401 responses: verify `X-API-Key` header value.
+

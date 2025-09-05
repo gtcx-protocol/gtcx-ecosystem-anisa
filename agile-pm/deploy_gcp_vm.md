@@ -26,3 +26,4 @@ uvicorn src.api:app --host 0.0.0.0 --port 8000
 ```bash
 curl -s -H "X-API-Key: $ANISA_API_KEY" http://<VM_IP>:8000/api/v1/tool/describe
 ```
+

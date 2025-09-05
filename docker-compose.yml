@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  anisa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - ANISA_PORT=8083
+      - ANISA_API_KEY=${ANISA_API_KEY:-test-key-anisa}
+      - ANISA_DB_URL=postgresql://gtcx:gtcx@db:5432/gtcx
+      - PANX_URL=http://panx:8081
+      - CORTEX_URL=http://cortex:8082
+      - PANX_API_KEY=${PANX_API_KEY:-test-key-panx}
+      - CORTEX_API_KEY=${CORTEX_API_KEY:-test-key-cortex}
+      - CORS_ORIGINS=${CORS_ORIGINS:-*}
+    depends_on:
+      - db
+    networks:
+      - gtcx-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=gtcx
+      - POSTGRES_PASSWORD=gtcx
+      - POSTGRES_DB=gtcx
+    volumes:
+      - anisa_db_data:/var/lib/postgresql/data
+    networks:
+      - gtcx-network
+    restart: always
+
+volumes:
+  anisa_db_data:
+
+networks:
+  gtcx-network:
+    driver: bridge
